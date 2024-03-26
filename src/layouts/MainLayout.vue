@@ -1,18 +1,24 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header bordered class="bg-primary text-white" height-hint="98">
+    <q-header bordered class="bg-primary text-black">
       <q-toolbar class="items-center q-my-md">
         <q-toolbar-title class="flex flex-center">
           <q-avatar>
-            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg" />
+            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-black.svg" />
           </q-avatar>
         </q-toolbar-title>
       </q-toolbar>
 
-      <q-tabs align="left">
-        <q-route-tab to="/page1" label="Page One" />
-        <q-route-tab to="/page2" label="Page Two" />
-        <q-route-tab to="/page3" label="Page Three" />
+      <q-tabs>
+        <!-- align="left" -->
+        <q-space />
+        <q-route-tab to="/page1" label="게시판" />
+        <q-space />
+        <q-space />
+        <q-space />
+        <q-route-tab to="/page2" label="로그인" />
+        <q-route-tab to="/page3" label="회원가입" />
+        <q-space />
       </q-tabs>
     </q-header>
 
