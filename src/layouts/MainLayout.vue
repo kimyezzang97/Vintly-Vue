@@ -27,14 +27,25 @@
     </q-page-container>
 
     <q-footer elevated class="bg-grey-8 text-white">
-      <q-toolbar>
-        <q-toolbar-title>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg" />
-          </q-avatar>
-          <div>Title</div>
-        </q-toolbar-title>
-      </q-toolbar>
+      <q-tabs v-model="tab" class="text-black bg-primary">
+        <q-tab label="회사소개" />
+        <q-tab label="이용약관" />
+        <q-tab label="개인정보처리방침" />
+        <q-tab label="청소년보호방침" />
+        <q-tab label="광고 문의 및 안내" />
+      </q-tabs>
+      <q-tabs class="q-py-md bottom">
+        <q-space />
+        <div class="">
+          <div class="">VINTLY</div>
+          <div class="">관리자 : 김예짱 | E-mail : jvintaged@gamil.com</div>
+          <div class="">©VINTLY. ALL RIGHTS RESERVED</div>
+        </div>
+        <q-space />
+        <q-space />
+        <q-space />
+        <q-space />
+      </q-tabs>
     </q-footer>
   </q-layout>
 </template>
@@ -98,3 +109,10 @@ function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 }
 </script>
+
+<style lang="scss">
+.bottom {
+  color: $red-1;
+  background-color: #a08771;
+}
+</style>
