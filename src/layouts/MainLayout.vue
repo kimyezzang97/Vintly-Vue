@@ -1,11 +1,10 @@
 <template>
   <q-layout view="hHh lpR fFf">
     <q-header bordered class="bg-primary text-black">
-      <q-toolbar class="items-center q-my-md">
+      <q-toolbar class="items-center q-pt-sm">
         <q-toolbar-title class="flex flex-center">
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-black.svg" />
-          </q-avatar>
+          <!-- <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-black.svg" /> -->
+          <div><img src="../assets/logo_brown.png" width="130px" /></div>
         </q-toolbar-title>
       </q-toolbar>
 
@@ -37,8 +36,10 @@
       <q-tabs class="q-py-md bottom">
         <q-space />
         <div class="">
-          <div class="">VINTLY</div>
-          <div class="">관리자 : 김예짱 | E-mail : jvintaged@gamil.com</div>
+          <div class="">
+            <img src="../assets/logo_black.png" width="65px" />
+          </div>
+          <div class="">관리자 : 김예짱 | E-mail : jvintaged@gmail.com</div>
           <div class="">©VINTLY. ALL RIGHTS RESERVED</div>
         </div>
         <q-space />
@@ -52,6 +53,7 @@
 
 <script setup>
 import { ref } from 'vue';
+
 import EssentialLink from 'components/EssentialLink.vue';
 
 defineOptions({
