@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh lpR fFf">
     <q-header bordered class="bg-primary text-black">
-      <q-toolbar class="items-center q-pt-sm">
+      <q-toolbar class="items-center q-pt-md">
         <q-toolbar-title class="flex flex-center">
           <!-- <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-black.svg" /> -->
           <div><img src="../assets/logo_brown.png" width="130px" /></div>

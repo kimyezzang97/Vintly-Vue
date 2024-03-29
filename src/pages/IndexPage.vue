@@ -45,6 +45,40 @@
         <q-separator inset class="q-separator-inset" spaced="xs" />
       </div>
     </div>
+
+    <q-tabs class="q-mt-xl">
+      <q-space />
+      <div class="text-h6">Member Of Month</div>
+      <q-space />
+      <q-space />
+      <q-space />
+      <q-space />
+    </q-tabs>
+
+    <div class="q-mt-xs flex flex-center q-gutter-x-xl">
+      <!-- q-col-gutter-xl -->
+      <q-space />
+      <q-space />
+      <img
+        alt="Quasar logo"
+        src="../assets/month1.png"
+        style="width: 230px; height: 300px"
+      />
+      <q-space />
+      <img
+        alt="Quasar logo"
+        src="../assets/month2.png"
+        style="width: 230px; height: 300px"
+      />
+      <q-space />
+      <img
+        alt="Quasar logo"
+        src="../assets/month1.png"
+        style="width: 230px; height: 300px"
+      />
+      <q-space />
+      <q-space />
+    </div>
   </q-page>
 </template>
 
