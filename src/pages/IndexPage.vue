@@ -55,30 +55,43 @@
       <q-space />
     </q-tabs>
 
-    <div class="q-mt-xs flex flex-center q-gutter-x-xl">
+    <div class="q-mt-sm q-pb-xl flex flex-center q-gutter-x-xl">
       <!-- q-col-gutter-xl -->
       <q-space />
       <q-space />
       <img
         alt="Quasar logo"
         src="../assets/month1.png"
-        style="width: 230px; height: 300px"
+        style="width: 230px; height: 295px"
       />
       <q-space />
       <img
         alt="Quasar logo"
         src="../assets/month2.png"
-        style="width: 230px; height: 300px"
+        style="width: 230px; height: 295px"
       />
       <q-space />
       <img
         alt="Quasar logo"
         src="../assets/month1.png"
-        style="width: 230px; height: 300px"
+        style="width: 230px; height: 295px"
       />
       <q-space />
       <q-space />
     </div>
+
+    <q-tabs class="q-mt-xl">
+      <q-space />
+      <div class="text-h6">빈티지 매장 및 구제샾 위치</div>
+      <q-space />
+      <q-space />
+      <q-space />
+      <q-space />
+    </q-tabs>
+
+    <div class="q-mt-sm" style="height: 270px; background-color: #dadada"></div>
+
+    <div class="" style="height: 50px; background-color: #ffffff"></div>
   </q-page>
 </template>
 
