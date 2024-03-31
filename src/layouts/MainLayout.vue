@@ -4,7 +4,11 @@
       <q-toolbar class="items-center q-pt-md">
         <q-toolbar-title class="flex flex-center">
           <!-- <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-black.svg" /> -->
-          <div><img src="../assets/logo_brown.png" width="130px" /></div>
+          <div>
+            <router-link to="/">
+              <q-img src="../assets/logo_brown.png" width="130px" to="/" />
+            </router-link>
+          </div>
         </q-toolbar-title>
       </q-toolbar>
 
@@ -16,7 +20,7 @@
         <q-space />
         <q-space />
         <q-route-tab to="/page2" label="로그인" />
-        <q-route-tab to="/page3" label="회원가입" />
+        <q-route-tab to="/member/join" label="회원가입" />
         <q-space />
       </q-tabs>
     </q-header>
