@@ -38,6 +38,7 @@
         text-color="brown-5"
         label="중복확인"
         style="font-size: 16px; width: 130px; height: 55px"
+        @click="test(id)"
       />
     </div>
 
@@ -48,7 +49,7 @@
       <div class="" style="width: 380px">
         <q-input
           outlined
-          v-model="id"
+          v-model="pw"
           label=""
           color="teal-10"
           style="font-size: 20px"
@@ -64,7 +65,7 @@
       <div class="" style="width: 380px">
         <q-input
           outlined
-          v-model="id"
+          v-model="pwChk"
           label=""
           color="teal-10"
           style="font-size: 20px"
@@ -80,7 +81,7 @@
       <div class="" style="width: 380px">
         <q-input
           outlined
-          v-model="id"
+          v-model="name"
           label=""
           color="teal-10"
           style="font-size: 20px"
@@ -96,7 +97,7 @@
       <div class="" style="width: 380px">
         <q-input
           outlined
-          v-model="id"
+          v-model="email"
           label=""
           color="teal-10"
           style="font-size: 20px"
@@ -118,7 +119,7 @@
       <div class="" style="width: 380px">
         <q-input
           outlined
-          v-model="id"
+          v-model="address"
           label="주소검색"
           color="teal-10"
           style="font-size: 20px"
@@ -134,7 +135,7 @@
       <div class="" style="width: 380px">
         <q-input
           outlined
-          v-model="id"
+          v-model="addressDetail"
           label=""
           color="teal-10"
           style="font-size: 20px"
@@ -150,7 +151,7 @@
       <div class="" style="width: 380px">
         <q-input
           outlined
-          v-model="id"
+          v-model="nickname"
           label=""
           color="teal-10"
           style="font-size: 20px"
@@ -172,7 +173,7 @@
       <div class="" style="width: 380px">
         <q-input
           outlined
-          v-model="id"
+          v-model="birth"
           label=""
           color="teal-10"
           style="font-size: 20px"
@@ -187,7 +188,7 @@
       </div>
       <div class="q-gutter-sm">
         <q-radio
-          v-model="shape"
+          v-model="gender"
           checked-icon="task_alt"
           unchecked-icon="panorama_fish_eye"
           val="line"
@@ -197,7 +198,7 @@
         />
 
         <q-radio
-          v-model="shape"
+          v-model="gender"
           checked-icon="task_alt"
           unchecked-icon="panorama_fish_eye"
           val="rectangle"
@@ -224,10 +225,29 @@
 
 <script setup>
 import { ref } from 'vue';
+import { getChkId } from 'src/api/member/join';
+
 const id = ref('');
-const pwd = ref('');
+const pw = ref('');
+const pwChk = ref('');
+const name = ref('');
+const email = ref('');
 const address = ref('');
-const shape = ref('line');
+const addressDetail = ref('');
+const nickname = ref('');
+const birth = ref('');
+
+const gender = ref('line');
+
+function test(id) {
+  getChkId(id)
+    .then(res => {
+      alert(res.data.data);
+    })
+    .catch(function (error) {
+      alert('잠시후 다시 이용해주세요.');
+    });
+}
 </script>
 
 <style lang="scss" scoped>
