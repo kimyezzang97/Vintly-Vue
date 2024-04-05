@@ -73,8 +73,10 @@
           color="teal-10"
           style="font-size: 20px"
           type="password"
-          hint="비밀번호가 일치하지 않습니다."
           maxlength="20"
+          class="inputPwChk"
+          :hint="pwHint"
+          hint-color="red"
         />
       </div>
       <div style="width: 130px"></div>
@@ -212,7 +214,7 @@
           v-model="gender"
           checked-icon="task_alt"
           unchecked-icon="panorama_fish_eye"
-          val="line"
+          val="M"
           label="남자"
           color="teal-9"
           class="q-px-xl"
@@ -222,7 +224,7 @@
           v-model="gender"
           checked-icon="task_alt"
           unchecked-icon="panorama_fish_eye"
-          val="rectangle"
+          val="W"
           label="여자"
           color="orange-10"
           class="q-px-xl"
@@ -245,12 +247,14 @@
     <input v-model="idChkStatus" type="text" />
     <input v-model="emailChkStatus" type="text" />
     <input v-model="nicknameChkStatus" type="text" />
+    <input v-model="gender" type="text" />
+    <input v-model="birth" type="text" />
   </q-page>
 </template>
 
 <script setup>
 import { ref, watch } from 'vue';
-import { getChkId } from 'src/api/member/join';
+import { getChkId, getChkEmail, getChkNickname } from 'src/api/member/join';
 
 const id = ref('');
 const pw = ref('');
@@ -267,7 +271,7 @@ const gender = ref('line');
 const idChkStatus = ref(false);
 const emailChkStatus = ref(false);
 const nicknameChkStatus = ref(false);
-
+const pwHint = ref('');
 // 변경감지
 watch(id, (newValue, oldValue) => {
   idChkStatus.value = false;
@@ -278,7 +282,16 @@ watch(email, (newValue, oldValue) => {
 watch(nickname, (newValue, oldValue) => {
   nicknameChkStatus.value = false;
 });
-
+watch(pwChk, (newValue, oldValue) => {
+  console.log(pw);
+  console.log(pwChk);
+  if (pw.value != pwChk.value) {
+    pwHint.value = '비밀번호가 일치하지 않습니다.';
+    //inputPwChk.hint.value = '비밀번호가 일치하지 않습니다';
+  } else {
+    pwHint.value = '';
+  }
+});
 function joinChkId(idParam) {
   if (4 >= idParam.length || idParam.length >= 21) {
     alert('5자이상 20자 이하로 입력해주세요');
@@ -301,8 +314,13 @@ function joinChkEmail(emailParam) {
     alert('64자 이하로 입력해주세요');
     return;
   }
-
-  getChkId(emailParam)
+  // 이메일 형식 정규식 패턴
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if (!emailPattern.test(emailParam)) {
+    alert('이메일 형식에 맞게 입력해주세요.');
+    return;
+  }
+  getChkEmail(emailParam)
     .then(res => {
       if (res.data.data == 0) {
         emailChkStatus.value = true;
@@ -319,7 +337,7 @@ function joinChkNickname(nicknameParam) {
     alert('2자이상 15자 이하로 입력해주세요');
     return;
   }
-  getChkId(nicknameParam)
+  getChkNickname(nicknameParam)
     .then(res => {
       if (res.data.data == 0) {
         nicknameChkStatus.value = true;
