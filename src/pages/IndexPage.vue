@@ -91,7 +91,7 @@
 
     <div class="q-mt-sm" style="height: 270px; background-color: #dadada"></div>
 
-    <div class="" style="height: 50px; background-color: #ffffff"></div>
+    <div class="" style="height: 130px; background-color: #ffffff"></div>
   </q-page>
 </template>
 
