@@ -27,9 +27,10 @@
         <q-input
           outlined
           v-model="id"
-          label=""
+          label="5자 이상 20자 이하의 영어, 숫자만 입력해주세요."
           color="teal-10"
           style="font-size: 20px"
+          maxlength="20"
         />
       </div>
       <q-btn
@@ -38,7 +39,7 @@
         text-color="brown-5"
         label="중복확인"
         style="font-size: 16px; width: 130px; height: 55px"
-        @click="test(id)"
+        @click="joinChkId(id)"
       />
     </div>
 
@@ -50,9 +51,11 @@
         <q-input
           outlined
           v-model="pw"
-          label=""
+          label="8자 이상 20자 이하로 입력해주세요."
           color="teal-10"
           style="font-size: 20px"
+          type="password"
+          maxlength="20"
         />
       </div>
       <div style="width: 130px"></div>
@@ -69,6 +72,9 @@
           label=""
           color="teal-10"
           style="font-size: 20px"
+          type="password"
+          hint="비밀번호가 일치하지 않습니다."
+          maxlength="20"
         />
       </div>
       <div style="width: 130px"></div>
@@ -85,6 +91,7 @@
           label=""
           color="teal-10"
           style="font-size: 20px"
+          maxlength="10"
         />
       </div>
       <div style="width: 130px"></div>
@@ -101,6 +108,8 @@
           label=""
           color="teal-10"
           style="font-size: 20px"
+          maxlength="64"
+          type="email"
         />
       </div>
       <q-btn
@@ -109,6 +118,7 @@
         text-color="brown-5"
         label="중복확인"
         style="font-size: 16px; width: 130px; height: 55px"
+        @click="joinChkEmail(email)"
       />
     </div>
 
@@ -123,9 +133,17 @@
           label="주소검색"
           color="teal-10"
           style="font-size: 20px"
+          readonly
         />
       </div>
-      <div style="width: 130px"></div>
+      <q-btn
+        outline
+        backg
+        color="teal"
+        text-color="teal-10"
+        label="주소검색"
+        style="font-size: 16px; width: 130px; height: 55px"
+      />
     </div>
 
     <div class="flex flex-center te q-gutter-lg q-pt-lg">
@@ -139,6 +157,7 @@
           label=""
           color="teal-10"
           style="font-size: 20px"
+          maxlength="60"
         />
       </div>
       <div style="width: 130px"></div>
@@ -163,6 +182,7 @@
         text-color="brown-5"
         label="중복확인"
         style="font-size: 16px; width: 130px; height: 55px"
+        @click="joinChkNickname(nickname)"
       />
     </div>
 
@@ -177,6 +197,7 @@
           label=""
           color="teal-10"
           style="font-size: 20px"
+          type="date"
         />
       </div>
       <div style="width: 130px"></div>
@@ -220,11 +241,15 @@
         style="font-size: 20px; width: 160px; height: 55px"
       />
     </div>
+    <div class="" style="height: 100px; background-color: #ffffff"></div>
+    <input v-model="idChkStatus" type="text" />
+    <input v-model="emailChkStatus" type="text" />
+    <input v-model="nicknameChkStatus" type="text" />
   </q-page>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { getChkId } from 'src/api/member/join';
 
 const id = ref('');
@@ -239,10 +264,67 @@ const birth = ref('');
 
 const gender = ref('line');
 
-function test(id) {
-  getChkId(id)
+const idChkStatus = ref(false);
+const emailChkStatus = ref(false);
+const nicknameChkStatus = ref(false);
+
+// 변경감지
+watch(id, (newValue, oldValue) => {
+  idChkStatus.value = false;
+});
+watch(email, (newValue, oldValue) => {
+  emailChkStatus.value = false;
+});
+watch(nickname, (newValue, oldValue) => {
+  nicknameChkStatus.value = false;
+});
+
+function joinChkId(idParam) {
+  if (4 >= idParam.length || idParam.length >= 21) {
+    alert('5자이상 20자 이하로 입력해주세요');
+    return;
+  }
+  getChkId(idParam)
     .then(res => {
-      alert(res.data.data);
+      if (res.data.data == 0) {
+        idChkStatus.value = true;
+        alert('사용가능한 ID 입니다.');
+      }
+    })
+    .catch(function (error) {
+      alert('잠시후 다시 이용해주세요.');
+    });
+}
+
+function joinChkEmail(emailParam) {
+  if (emailParam.length >= 65) {
+    alert('64자 이하로 입력해주세요');
+    return;
+  }
+
+  getChkId(emailParam)
+    .then(res => {
+      if (res.data.data == 0) {
+        emailChkStatus.value = true;
+        alert('사용가능한 이메일 입니다.');
+      }
+    })
+    .catch(function (error) {
+      alert('잠시후 다시 이용해주세요.');
+    });
+}
+
+function joinChkNickname(nicknameParam) {
+  if (1 >= nicknameParam.length || nicknameParam.length >= 16) {
+    alert('2자이상 15자 이하로 입력해주세요');
+    return;
+  }
+  getChkId(nicknameParam)
+    .then(res => {
+      if (res.data.data == 0) {
+        nicknameChkStatus.value = true;
+        alert('사용가능한 닉네임 입니다.');
+      }
     })
     .catch(function (error) {
       alert('잠시후 다시 이용해주세요.');
