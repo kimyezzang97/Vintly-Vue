@@ -283,9 +283,9 @@ watch(email, (newValue, oldValue) => {
 watch(nickname, (newValue, oldValue) => {
   nicknameChkStatus.value = false;
 });
+
+// pw 일치 확인
 watch(pwChk, (newValue, oldValue) => {
-  console.log(pw);
-  console.log(pwChk);
   if (pw.value != pwChk.value) {
     pwHint.value = '비밀번호가 일치하지 않습니다.';
     //inputPwChk.hint.value = '비밀번호가 일치하지 않습니다';
@@ -293,11 +293,20 @@ watch(pwChk, (newValue, oldValue) => {
     pwHint.value = '';
   }
 });
+
+// ID 중복확인
 function joinChkId(idParam) {
   if (4 >= idParam.length || idParam.length >= 21) {
     alert('5자이상 20자 이하로 입력해주세요');
     return;
   }
+
+  const regexId = /^[A-Za-z0-9]+$/;
+  if (!regexId.test(idParam)) {
+    alert('영어랑 숫자만 입력해주세요.');
+    return;
+  }
+
   getChkId(idParam)
     .then(res => {
       if (res.data.data == 0) {
@@ -310,14 +319,15 @@ function joinChkId(idParam) {
     });
 }
 
+// email 중복확인
 function joinChkEmail(emailParam) {
   if (emailParam.length >= 65) {
     alert('64자 이하로 입력해주세요');
     return;
   }
   // 이메일 형식 정규식 패턴
-  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  if (!emailPattern.test(emailParam)) {
+  const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if (!regexEmail.test(emailParam)) {
     alert('이메일 형식에 맞게 입력해주세요.');
     return;
   }
@@ -333,11 +343,19 @@ function joinChkEmail(emailParam) {
     });
 }
 
+// nickname 중복확인
 function joinChkNickname(nicknameParam) {
   if (1 >= nicknameParam.length || nicknameParam.length >= 16) {
     alert('2자이상 15자 이하로 입력해주세요');
     return;
   }
+
+  const regexNickname = /^[가-힣A-Za-z0-9_-]+$/;
+  if (!regexNickname.test(nicknameParam)) {
+    alert('한글(초성X), 영어, 숫자, -, _ 만 입력해주세요.');
+    return;
+  }
+
   getChkNickname(nicknameParam)
     .then(res => {
       if (res.data.data == 0) {
