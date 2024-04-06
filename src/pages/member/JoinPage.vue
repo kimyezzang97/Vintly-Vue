@@ -132,7 +132,7 @@
         <q-input
           outlined
           v-model="address"
-          label="주소검색"
+          label=""
           color="teal-10"
           style="font-size: 20px"
           readonly
@@ -145,6 +145,7 @@
         text-color="teal-10"
         label="주소검색"
         style="font-size: 16px; width: 130px; height: 55px"
+        @click="openPostCode()"
       />
     </div>
 
@@ -173,7 +174,7 @@
         <q-input
           outlined
           v-model="nickname"
-          label=""
+          label="2자~15자로 입력해주세요 (특수문자는 _-만 가능)"
           color="teal-10"
           style="font-size: 20px"
         />
@@ -347,6 +348,16 @@ function joinChkNickname(nicknameParam) {
     .catch(function (error) {
       alert('잠시후 다시 이용해주세요.');
     });
+}
+
+// Daum 주소 API
+function openPostCode() {
+  new daum.Postcode({
+    oncomplete: function (data) {
+      address.value = data.roadAddress;
+      console.log(data.roadAddress);
+    },
+  }).open();
 }
 </script>
 
