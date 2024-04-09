@@ -51,7 +51,7 @@
         <q-input
           outlined
           v-model="pw"
-          label="8자 이상 20자 이하로 입력해주세요."
+          label="영어, 숫자, 특수문자를 혼합하여 8자 이상 20자 이하로 입력해주세요."
           color="teal-10"
           style="font-size: 20px"
           type="password"
@@ -156,7 +156,7 @@
       <div class="" style="width: 380px">
         <q-input
           outlined
-          v-model="addressDetail"
+          v-model="detailAddress"
           label=""
           color="teal-10"
           style="font-size: 20px"
@@ -242,20 +242,23 @@
         color="brown-5"
         label="회원가입"
         style="font-size: 20px; width: 160px; height: 55px"
+        @click="join()"
       />
     </div>
     <div class="" style="height: 100px; background-color: #ffffff"></div>
-    <input v-model="idChkStatus" type="text" />
-    <input v-model="emailChkStatus" type="text" />
-    <input v-model="nicknameChkStatus" type="text" />
-    <input v-model="gender" type="text" />
-    <input v-model="birth" type="text" />
   </q-page>
 </template>
 
 <script setup>
 import { ref, watch } from 'vue';
-import { getChkId, getChkEmail, getChkNickname } from 'src/api/member/join';
+import {
+  getChkId,
+  getChkEmail,
+  getChkNickname,
+  postMemberJoin,
+} from 'src/api/member/join';
+import { useRouter } from 'vue-router'; // <- import useRoute here
+const router = useRouter();
 
 const id = ref('');
 const pw = ref('');
@@ -263,7 +266,7 @@ const pwChk = ref('');
 const name = ref('');
 const email = ref('');
 const address = ref('');
-const addressDetail = ref('');
+const detailAddress = ref('');
 const nickname = ref('');
 const birth = ref('');
 
@@ -376,6 +379,57 @@ function openPostCode() {
       console.log(data.roadAddress);
     },
   }).open();
+}
+
+// 회원가입 버튼
+function join() {
+  //alert(this.pw);
+  const chk = qualifiedJoin(this.pw);
+  if (chk != -1) {
+    const data = {
+      memberId: this.id,
+      pw: this.pw,
+      name: this.name,
+      address: this.address,
+      detailAddress: this.detailAddress,
+      nickname: this.nickname,
+      birth: this.birth,
+      email: this.email,
+      gender: this.gender,
+    };
+
+    postMemberJoin(data)
+      .then(res => {
+        if (res.data.status == 'OK') {
+          alert(res.data.message + ' 이메일 인증 후 사용 해주세요.');
+          //routes.push('/');
+          router.push('/');
+        } else {
+          alert(res.data.message);
+        }
+      })
+      .catch(function (error) {
+        alert('잠시후 다시 이용해주세요.');
+      });
+  }
+}
+
+function qualifiedJoin(pwParam) {
+  // pw
+  const regexPw =
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
+  if (!regexPw.test(pwParam)) {
+    alert(
+      '비밀번호는 영어, 숫자, 특수문자를 혼합하여 8자 이상 20자 이하로 입력해주세요.',
+    );
+    return -1;
+  }
+
+  // 성별
+  if (gender.value == '') {
+    alert('성별을 체크해주세요.');
+    return -1;
+  }
 }
 </script>
 

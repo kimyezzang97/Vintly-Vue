@@ -17,3 +17,8 @@ export const getChkNickname = async nickname => {
   const data = await api.get(`/member/nickname/{nickname}`);
   return data;
 };
+
+export const postMemberJoin = async joinForm => {
+  const data = await api.post(`/member/join`, joinForm);
+  return data;
+};
