@@ -19,7 +19,7 @@
         <q-space />
         <q-space />
         <q-space />
-        <q-route-tab to="/page2" label="로그인" />
+        <q-route-tab to="/member/login" label="로그인" />
         <q-route-tab to="/member/join" label="회원가입" />
         <q-space />
       </q-tabs>
