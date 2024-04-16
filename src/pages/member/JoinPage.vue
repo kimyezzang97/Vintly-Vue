@@ -315,6 +315,8 @@ function joinChkId(idParam) {
       if (res.data.data == 0) {
         idChkStatus.value = true;
         alert('사용가능한 ID 입니다.');
+      } else {
+        alert('사용중인 ID 입니다. 다른 ID를 사용해주세요.');
       }
     })
     .catch(function (error) {
@@ -339,6 +341,8 @@ function joinChkEmail(emailParam) {
       if (res.data.data == 0) {
         emailChkStatus.value = true;
         alert('사용가능한 이메일 입니다.');
+      } else {
+        alert('사용중인 이메일 입니다. 다른 이메일을 사용해주세요.');
       }
     })
     .catch(function (error) {
@@ -364,6 +368,8 @@ function joinChkNickname(nicknameParam) {
       if (res.data.data == 0) {
         nicknameChkStatus.value = true;
         alert('사용가능한 닉네임 입니다.');
+      } else {
+        alert('사용중인 닉네임 입니다. 다른 닉네임을 사용해주세요.');
       }
     })
     .catch(function (error) {
