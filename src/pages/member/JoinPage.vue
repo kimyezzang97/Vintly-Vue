@@ -395,15 +395,15 @@ function join() {
   //alert(chk);
   if (chk != -1) {
     const data = {
-      memberId: this.id,
-      pw: this.pw,
-      name: this.name,
-      address: this.address,
-      detailAddress: this.detailAddress,
-      nickname: this.nickname,
-      birth: this.birth,
-      email: this.email,
-      gender: this.gender,
+      memberId: id.value,
+      pw: pw.value,
+      name: name.value,
+      address: address.value,
+      detailAddress: detailAddress.value,
+      nickname: nickname.value,
+      birth: birth.value,
+      email: email.value,
+      gender: gender.value,
     };
 
     postMemberJoin(data)
