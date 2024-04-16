@@ -390,7 +390,9 @@ function openPostCode() {
 // 회원가입 버튼
 function join() {
   //alert(this.pw);
-  const chk = qualifiedJoin(this.pw);
+  //alert(pw.value);
+  const chk = qualifiedJoin(pw.value);
+  //alert(chk);
   if (chk != -1) {
     const data = {
       memberId: this.id,
